@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0dcff1"],{8003:function(n,e,t){"use strict";t.r(e);var c={components:{},name:"Agenda"},u=function(){var n=this,e=n.$createElement,t=n._self._c||e;return t("div",[n._v("\n    待办\n")])},a=[],l=t("2455"),o=!1,s=null,r=null,d=null,i=Object(l["a"])(c,u,a,o,s,r,d);e["default"]=i.exports}}]);
-//# sourceMappingURL=chunk-2d0dcff1.8a1f7a0a.js.map
