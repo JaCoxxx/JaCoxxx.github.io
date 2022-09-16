@@ -44,41 +44,46 @@ a:visited {
 a:hover {
   text-decoration: none; /*鼠标放上去有下划线*/
 }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
-  background-color: #4a4a4a;
-  background: -webkit-linear-gradient(
-      315deg,
-      #4a4a4a 0%,
-      #4a4a4a 30%,
-      #7e7e7e 100%
-    )
-    fixed;
-  background: linear-gradient(135deg, #4a4a4a 0%, #4a4a4a 30%, #7e7e7e 100%)
-    fixed;
+  user-select: none;
+  background: url(../assets/bg.jpg) center fixed,
+    linear-gradient(135deg, #4a4a4a 0%, #4a4a4a 30%, #7e7e7e 100%) fixed;
 }
 
 .container-box {
   width: 620px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.4);
   border-radius: 4px;
   margin: 120px auto 0;
   text-align: center;
+  backdrop-filter: blur(2px);
+  animation: container .5s;
 }
 .image {
   margin: -60px auto 20px;
   display: inline-block;
   width: 120px;
   height: 120px;
-  background-image: url(https://jacokwu.cn/images/public/author.jpg);
+  background-image: url(https://github.jacokwu.cn/images/public/author.jpg);
   background-size: cover;
   border-radius: 50%;
   background-repeat: no-repeat;
   background-position: center center;
   box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 0 2px 0 rgba(0, 0, 0, 0.1);
+  animation: photoRotate 1s linear 0s 1 normal forwards;
+  transition: box-shadow .3s;
 }
 
 .image:hover {
-  animation: imageTrans 1.5s ease-in;
+  /* animation: imageTrans 1.5s ease-in; */
+  box-shadow: inset 0 0 40px 0 rgba(0, 0, 0, 0.2), 0 0 2px 0 rgba(0, 0, 0, 0.1);
 }
 
 .name-box {
@@ -138,21 +143,20 @@ body {
   padding: 0 20px;
   max-width: 400px;
   height: 50px;
-  width: 100%;
+  width: 115px;
   color: #fff;
   background-color: #4a4a4a;
   border-color: #4a4a4a;
   box-shadow: inset 0 0 0 100px hsla(0, 0%, 100%, 0);
   line-height: 50px;
   cursor: pointer;
+  font-size: 18px;
+  transition: width .3s ease-in-out;
 }
 
-.btn a {
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-  color: #fff;
-  font-size: 18px;
+.btn:hover {
+  width: 165px;
+  box-shadow: 0 0 12px #979797;
 }
 
 .des {
@@ -167,15 +171,89 @@ body {
   text-indent: 2em;
 }
 
+footer {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+footer > a {
+  color: #fff;
+  margin-left: 12px;
+}
+
 @media (max-width: 620px) {
   .container-box {
     width: 100%;
-    height: calc(100vh - 120px);
+    height: 100vh;
+    margin: 0;
     border-radius: 0;
+  }
+  .image {
+    margin: 60px auto 20px;
   }
   .btn {
     margin: 0 20px;
     width: auto;
+  }
+
+  .btn:hover {
+    width: 115px;
+    box-shadow: 0 0 12px #979797;
+  }
+
+  footer {
+    flex-flow: column;
+    color: #333;
+  }
+
+  footer > a {
+    color: #333;
+    margin-top: 6px;
+    margin-left: 0;
+  }
+}
+
+@keyframes container {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes photoRotate {
+  0% {
+    opacity: 0;
+  }
+  49% {
+    opacity: 0;
+  }
+  50% {
+    transform: rotateX(-90deg);
+    opacity: 1;
+  }
+  60% {
+    transform: rotateX(0);
+  }
+  70% {
+    transform: rotateX(90deg);
+  }
+  80% {
+    transform: rotateX(180deg);
+  }
+  90% {
+    transform: rotateX(270deg);
+  }
+  100% {
+    transform: scale(360deg);
   }
 }
 
