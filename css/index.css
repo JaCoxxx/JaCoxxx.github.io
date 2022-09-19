@@ -45,7 +45,8 @@ a:hover {
   text-decoration: none; /*鼠标放上去有下划线*/
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -53,18 +54,120 @@ html, body {
 
 body {
   user-select: none;
-  background: url(../assets/bg.jpg) center fixed,
-    linear-gradient(135deg, #4a4a4a 0%, #4a4a4a 30%, #7e7e7e 100%) fixed;
+}
+
+canvas {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  position: absolute;
+  z-index: 10;
+}
+
+.container .p-image {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, -1000px);
+  z-index: 10;
+  margin: 0;
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  background-image: url(https://github.jacokwu.cn/images/public/author.jpg);
+  background-size: cover;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.container .p-image::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border-left: 2px solid #fff;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid transparent;
+  border-top: 2px solid transparent;
+  transition: all .3s;
+}
+
+.container .p-image:hover::before {
+  width: 150px;
+  height: 150px;
+  animation: imageScale 5s linear .3s infinite;
+}
+
+.container .p-name-box {
+  position: absolute;
+  left: calc(50% + 90px);
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.container .p-name-box::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -30px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+}
+
+.container .p-name-box .name {
+  font-size: 20px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin: 0 8px 0 0;
+}
+
+.container .p-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 100px);
 }
 
 .container-box {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   width: 620px;
   background: rgba(255, 255, 255, 0.4);
   border-radius: 4px;
   margin: 120px auto 0;
   text-align: center;
   backdrop-filter: blur(2px);
-  animation: container .5s;
+  animation: container 0.5s;
+  z-index: 10;
 }
 .image {
   margin: -60px auto 20px;
@@ -78,7 +181,7 @@ body {
   background-position: center center;
   box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 0 2px 0 rgba(0, 0, 0, 0.1);
   animation: photoRotate 1s linear 0s 1 normal forwards;
-  transition: box-shadow .3s;
+  transition: box-shadow 0.3s;
 }
 
 .image:hover {
@@ -151,7 +254,7 @@ body {
   line-height: 50px;
   cursor: pointer;
   font-size: 18px;
-  transition: width .3s ease-in-out;
+  transition: width 0.3s ease-in-out;
 }
 
 .btn:hover {
@@ -171,6 +274,20 @@ body {
   text-indent: 2em;
 }
 
+.enter-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.enter-btn-scale {
+  animation: btnScale 0.5s;
+}
+
 footer {
   position: fixed;
   bottom: 12px;
@@ -181,6 +298,7 @@ footer {
   align-items: center;
   justify-content: center;
   white-space: nowrap;
+  z-index: 10;
 }
 
 footer > a {
@@ -222,10 +340,28 @@ footer > a {
 
 @keyframes container {
   from {
-    transform: scale(0);
+    transform: translateX(-50%) scale(0);
   }
   to {
-    transform: scale(1);
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+@keyframes btnScale {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+@keyframes imageScale {
+  0% {
+    transform: translate(-50%, -50%) rotateZ(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateZ(360deg);
   }
 }
 
