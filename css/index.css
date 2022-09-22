@@ -65,29 +65,27 @@ canvas {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .container {
-  perspective: 1000px;
-  transform-style: preserve-3d;
-  width: 100%;
-  height: 100%;
   background: transparent;
-  position: absolute;
-  z-index: 10;
-}
-
-.container .p-image {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate3d(-50%, -50%, -1000px);
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container .p-image {
   z-index: 10;
   margin: 0;
   display: inline-block;
-  width: 120px;
-  height: 120px;
+  width: 60px;
+  height: 60px;
   background-image: url(https://github.jacokwu.cn/images/public/author.jpg);
   background-size: cover;
   border-radius: 50%;
@@ -95,34 +93,9 @@ canvas {
   background-position: center center;
 }
 
-.container .p-image::before {
-  content: '';
-  display: block;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border-left: 2px solid #fff;
-  border-right: 2px solid #fff;
-  border-bottom: 2px solid transparent;
-  border-top: 2px solid transparent;
-  transition: all .3s;
-}
-
-.container .p-image:hover::before {
-  width: 150px;
-  height: 150px;
-  animation: imageScale 5s linear .3s infinite;
-}
-
 .container .p-name-box {
-  position: absolute;
-  left: calc(50% + 90px);
-  top: 50%;
-  transform: translate3d(0, -50%, 0);
+  position: relative;
+  margin-left: 60px;
   z-index: 10;
   display: flex;
   align-items: center;
@@ -154,6 +127,7 @@ canvas {
   left: 50%;
   top: 50%;
   transform: translate(-50%, 100px);
+  text-align: center;
 }
 
 .container-box {
@@ -282,6 +256,7 @@ canvas {
   color: #fff;
   z-index: 10;
   cursor: pointer;
+  font-family: fantasy;
 }
 
 .enter-btn-scale {
@@ -307,18 +282,18 @@ footer > a {
 }
 
 @media (max-width: 620px) {
-  .container-box {
-    width: 100%;
-    height: 100vh;
-    margin: 0;
-    border-radius: 0;
+  .container {
+    flex-flow: column;
   }
-  .image {
-    margin: 60px auto 20px;
+
+  .container .p-name-box {
+    flex-flow: column;
+    align-items: flex-start;
+    margin: 60px 0 100px 30px;
   }
-  .btn {
-    margin: 0 20px;
-    width: auto;
+
+  .container .p-name-box::before {
+    top: 4px;
   }
 
   .btn:hover {
@@ -328,11 +303,9 @@ footer > a {
 
   footer {
     flex-flow: column;
-    color: #333;
   }
 
   footer > a {
-    color: #333;
     margin-top: 6px;
     margin-left: 0;
   }
@@ -353,15 +326,6 @@ footer > a {
   }
   to {
     transform: translate(-50%, -50%) scale(0);
-  }
-}
-
-@keyframes imageScale {
-  0% {
-    transform: translate(-50%, -50%) rotateZ(0deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotateZ(360deg);
   }
 }
 
